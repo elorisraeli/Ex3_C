@@ -15,7 +15,7 @@ int getLine(char s[])
         scanf("%c", &s[i]);
         numOfChars++;
         // end of line
-        if (s[i] == '\n')
+        if ((s[i] == '\n') || (s[i] == '\r'))
         {
             // declaration of end of a string
             s[i] = '\0';
@@ -33,7 +33,7 @@ int getword(char w[])
         scanf("%c", &w[i]);
         numOfChars++;
         // end of word
-        if ((w[i] == '\n') || (w[i] == '\t') || (w[i] == ' '))
+        if ((w[i] == '\n') || (w[i] == '\t') || (w[i] == ' ') || (w[i] == '\r'))
         {
             // nothing to do, just done
             break;
