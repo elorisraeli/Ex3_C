@@ -35,7 +35,8 @@ int getword(char w[])
         // end of word
         if ((w[i] == '\n') || (w[i] == '\t') || (w[i] == ' ') || (w[i] == '\r'))
         {
-            // nothing to do, just done
+            // declaration of end of a string
+            w[i] = '\0';
             break;
         }
     }
@@ -51,7 +52,7 @@ int substring(char *str1, char *str2)
         if (str1[i] == str2[0])
         {
             // check the rest, run until first string's end
-            for (j = 1; j < strlen(str2) && (i + j) < strlen(str1); j++)
+            for (j = 1; j < strlen(str2) - 1 && (i + j) < strlen(str1); j++)
             {
                 // if there is char not the same
                 if (str1[i + j] != str2[j])
@@ -59,8 +60,8 @@ int substring(char *str1, char *str2)
                     break;
                 }
             }
-            // done for loop without break = same string
-            if (j == strlen(str2))
+            // done for loop without break = same string (moreover, '\0' char not included)
+            if (j == strlen(str2) - 1)
             {
                 return 1;
             }
@@ -82,7 +83,7 @@ int similar(char *s, char *t, int n)
     }
 
     // run until first string ends
-    while (i < len1 && j < len2)
+    while (i < len1)
     {
         // same characters, than forward both
         if (s[i] == t[j])
@@ -114,7 +115,7 @@ void print_lines(char *str)
         getLine(line);
         if (substring(line, str))
         {
-            printf("%s", line);
+            printf("%s\n", line);
         }
     }
 }
@@ -123,6 +124,7 @@ void print_similar_words(char *str)
 {
     char line[LINE];
     char word[WORD];
+    int k;
     // get all the lines from input
     for (int i = 0; i < MAX_LINES; i++)
     {
@@ -130,34 +132,35 @@ void print_similar_words(char *str)
         // get all the words from line
         for (int j = 0; j < strlen(line); j++)
         {
-            // forward to the next word
-            j += getword(word);
-            if (similar(word, str, 1) == 1)
+            k = 0;
+            memset(word, 0, strlen(word));
+            // get the word from the line without calling getline which scanf new word
+            while ((j < strlen(line)) && (line[j] != '\n') && (line[j] != '\t') && (line[j] != ' ') && (line[j] != '\r'))
+            {
+                word[k++] = line[j++];
+            }
+            word[k] = '\0';
+            if (similar(word, str, 1) == 1 || similar(word, str, 0))
             {
                 printf("%s\n", word);
             }
         }
+        memset(line, 0, strlen(line));
     }
 }
 
 int main()
 {
     char str_search[WORD];
-    char choiceLine[LINE];
-    char spaceLine[LINE];
-    char choice;
+    char choice[WORD];
     getword(str_search);
-    getLine(choiceLine);
-    // spam line need to be read
-    getLine(spaceLine);
-    // get the choice char which located 1 char before '\0' char in the end of line (string)
-    choice = choiceLine[strlen(choiceLine) - 2];
+    getLine(choice);
 
-    if (choice == 'a')
+    if (choice[0] == 'a')
     {
         print_lines(str_search);
     }
-    else if (choice == 'b')
+    else if (choice[0] == 'b')
     {
         print_similar_words(str_search);
     }
