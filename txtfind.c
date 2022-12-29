@@ -110,8 +110,8 @@ int similar(char *s, char *t, int n)
 
 void print_lines(char *str)
 {
-    char line[LINE];
-    int length;
+    char line[LINE] = {0};
+    int length = 0;
     for (int i = 0; i < MAX_LINES; i++)
     {
         memset(line, 0, strlen(line));
