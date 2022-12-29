@@ -38,18 +38,17 @@ int main()
     {
         scanf("%d", (arr + i));
     }
-
-    printf("\n\nThe Array is: \n");
-    for (int i = 0; i < NUM_OF_INPUTS; i++)
-    {
-        printf("%d,", *(arr + i));
-    }
-    printf("\nSorting...\n");
     insertion_sort(arr, NUM_OF_INPUTS);
-    printf("\nAfter Sort: \n");
     for (int i = 0; i < NUM_OF_INPUTS; i++)
     {
-        printf("%d,", *(arr + i));
+        if (i != NUM_OF_INPUTS - 1)
+        {
+            printf("%d,", *(arr + i));
+        }
+        else
+        {
+            printf("%d", *(arr + i));
+        }
     }
     return 0;
 }
