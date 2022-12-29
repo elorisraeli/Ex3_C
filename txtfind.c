@@ -52,7 +52,7 @@ int substring(char *str1, char *str2)
         if (str1[i] == str2[0])
         {
             // check the rest, run until first string's end
-            for (j = 1; j < strlen(str2) - 1 && (i + j) < strlen(str1); j++)
+            for (j = 1; j < strlen(str2) && (i + j) < strlen(str1); j++)
             {
                 // if there is char not the same
                 if (str1[i + j] != str2[j])
@@ -61,7 +61,7 @@ int substring(char *str1, char *str2)
                 }
             }
             // done for loop without break = same string (moreover, '\0' char not included)
-            if (j == strlen(str2) - 1)
+            if (j == strlen(str2))
             {
                 return 1;
             }
