@@ -110,12 +110,18 @@ int similar(char *s, char *t, int n)
 void print_lines(char *str)
 {
     char line[LINE];
+    int length;
     for (int i = 0; i < MAX_LINES; i++)
     {
-        getLine(line);
+        memset(line, 0, strlen(line));
+        length = getLine(line);
         if (substring(line, str))
         {
             printf("%s\n", line);
+        }
+        if (length <= 0)
+        {
+            break;
         }
     }
 }
