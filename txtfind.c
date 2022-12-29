@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "txtfind.h"
 
 #define LINE 256
 #define WORD 30

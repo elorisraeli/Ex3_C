@@ -9,10 +9,10 @@ isort: isort.o
 txtfind: txtfind.o
 	$(CC) $(FLAGS) -o txtfind txtfind.o
 
-isort.o: isort.c
+isort.o: isort.c isort.h
 	$(CC) $(FLAGS) -c isort.c
 
-txtfind.o: txtfind.c
+txtfind.o: txtfind.c txtfind.h
 	$(CC) $(FLAGS) -c txtfind.c
 
 .PHONY: clean all
